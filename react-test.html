@@ -25,12 +25,14 @@ class UserName extends React.Component {
     this.state = {
       value: null,
       submitted: false,
-      clicks:0 
+      clicks:0,
+      counter: 20
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.clickButton = this.clickButton.bind(this);
+
   }
 
   handleChange(e) {
@@ -45,7 +47,8 @@ class UserName extends React.Component {
   }
   clickButton() {
     this.setState((prevState) => ({
-      clicks: prevState.clicks + 1
+      clicks: prevState.clicks + 1,
+      counter: prevState.counter - 1
     })
     );
   }
@@ -55,7 +58,7 @@ class UserName extends React.Component {
       return  (
           <div>
             <h2>El reto de {this.state.value}</h2>
-            <p>Tienes 20 segundos para hacer 20 clicks.</p>
+            <p>Tienes {this.state.counter} segundos para hacer 20 clicks.</p>
             <button type="submit" value="Click" onClick={() => {this.clickButton()}}>{this.state.clicks} clicks</button>
           </div>
           );
