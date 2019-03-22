@@ -15,16 +15,22 @@
     <script crossorigin src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js"></script>
 
     <script type="text/babel">
+
+
+
+
 class UserName extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       value: null,
-      submitted: false 
+      submitted: false,
+      clicks:0 
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.clickButton = this.clickButton.bind(this);
   }
 
   handleChange(e) {
@@ -37,14 +43,20 @@ class UserName extends React.Component {
     alert('Hola ' + this.state.value + ', ¿quieres jugar a un juego?');
     
   }
+  clickButton() {
+    this.setState((prevState) => ({
+      clicks: prevState.clicks + 1
+    })
+    );
+  }
 
   render() {
     if (this.state.submitted === true) {
       return  (
           <div>
             <h2>El reto de {this.state.value}</h2>
-            <p>Tienes 20 segundos para hacer 20 clicks</p>
-            <input type="submit" value="Click" onClick={() => {this.clickButton()}}/>
+            <p>Tienes 20 segundos para hacer 20 clicks.</p>
+            <button type="submit" value="Click" onClick={() => {this.clickButton()}}>{this.state.clicks} clicks</button>
           </div>
           );
     }
@@ -62,6 +74,8 @@ class UserName extends React.Component {
     );
   }
 }
+
+
 ReactDOM.render(<UserName />, document.getElementById("root"));
 
     </script>
